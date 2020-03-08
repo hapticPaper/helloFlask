@@ -10,3 +10,6 @@ clone the rep with
 
 Run the server
 `python app.py`
+
+
+You can see the app running live at https://rusty-flask.herokuapp.com/
