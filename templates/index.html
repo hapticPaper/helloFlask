@@ -1,0 +1,78 @@
+<html>
+<link rel="stylesheet" type="text/css" href="\static/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="\static\highlightjs\atom-one-dark.css">
+<script src="\static\highlightjs\highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<title>Flask!</title>
+
+<head>
+</head>
+
+<body>
+    <h1>
+        Welcome to Hello Flask
+    </h1>
+
+
+<span class='bodyCode' style="color:darkgrey">
+
+</span><br>
+This is some boiler-plate code to launch the server behind this page:
+<div style="width:50vw;">
+<pre><code class="language-python">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def main():
+    return render_template('index.html')
+    
+if __name__ == '__main__':
+    app.run(threaded=True, debug=True)
+</code></pre>
+</div>
+The parts that matter here are:<br><br>
+<bodyCode>@app.route('/')</bodyCode><br><i>What follows are the instructions 
+for what to return when the user browses to</i> <bodyCode>/</bodyCode><br><br>
+<bodyCode>return render_template('index.html')</bodyCode><br>
+<i>Render the template </i><bodyCode>index.html</bodyCode><br><br>
+<bodyCode>app.run()</bodyCode><br>
+<b>Start the server.</b>
+The default is to run on the <i>loopback</i> address <bodyCode>127.0.0.1</bodyCode>, on port <bodyCode>5000</bodyCode>.
+<br>
+<br>
+<br>
+<h1>Fancy Server</h1>
+<table>
+    <thead>
+        <tr>
+            <td><input class="tb" required id="welcomeName" value="Ian"></td>     
+            <td><input class="tb" required id="inputbase" value="2"></td>      
+            <td><input class="tb" required id="inputJsonbase" value="2"></td>      
+        </tr>
+        
+        <tr>
+            <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
+            <td><input type="button" onclick="location.href='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
+            <td><input type="button" onclick="location.href='/json?base=' + $('#inputJsonbase').val();" value="See JSON Maths!" /></td>      
+        </tr>
+    </thead>
+</table>
+<script>
+    function personalWelcome(){
+        var name = $("#welcomeName").val();
+        if (name == ""){
+            alert("Please provide a name");
+            return
+        }
+        location.href='/welcome/'+name
+    }
+</script>
+
+</body>
+
+
+</html>

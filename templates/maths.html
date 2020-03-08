@@ -1,0 +1,79 @@
+<html>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="\static\highlightjs\atom-one-dark.css">
+<script src="\static\highlightjs\highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<title>Flask!</title>
+
+<head>
+</head>
+
+<body>
+    <h1>
+        Welcome, here's base ten coverted to base {{ base }} for 0-29.
+    </h1>
+
+
+<span class='bodyCode' style="color:darkgrey">
+
+</span><br>
+This is route and function that renders this page.
+<div style="width:1000px;">
+<pre><code class="language-python">@app.route('/maths')
+def maths():
+    parser = reqparse.RequestParser()
+    parser.add_argument('base', type=str, required=True, help="An number is required.", action='append')
+    args = parser.parse_args()
+    base = args['base'][0]
+    numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['int',f'base{base} int'])
+    return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
+</code></pre>
+</div>
+
+<bodyCode>parser.parse_args()</bodyCode>
+<br>A <bodyCode>reqparse.RequestParser()</bodyCode> must be initialized, and all arguments must be added to the class with <bodyCode>parser.add_argument()</bodyCode>. Then arguments can be collected with 
+<bodyCode>parser.parse_args()</bodyCode> and they can then be unpacked from the variable they get assigned to.<br>
+<br>
+
+<bodyCode>numbersdf.to_html(index=False)</bodyCode><br>
+Pandas DataFrames have a function <bodyCode>.to_html()</bodyCode>which will make an html table that can be directly rendered. <br><br>
+
+<bodyCode>&#x7b;&#x7b; numbers | safe &#x7d;&#x7d;</bodyCode><br>
+When the template is rendered, any html code provided in <bodyCode>numbers</bodyCode> is <bodyCode>safe</bodyCode> and we can directly render it.<br>
+<br>
+{{ numbers | safe }}
+<br>
+<h1>Fancy Server</h1>
+<table>
+    <thead>
+        <tr>
+            <td><input class="tb" required id="welcomeName" value="Ian"></td>     
+            <td><input class="tb" required id="inputbase" value="2"></td>      
+            <td><input class="tb" required id="inputJsonbase" value="2"></td>      
+        </tr>
+        
+        <tr>
+            <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
+            <td><input type="button" onclick="location.href='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
+            <td><input type="button" onclick="location.href='/json?base=' + $('#inputJsonbase').val();" value="See JSON Maths!" /></td>      
+        </tr>
+    </thead>
+</table>
+<script>
+    function personalWelcome(){
+        var name = $("#welcomeName").val();
+        if (name == ""){
+            alert("Please provide a name");
+            return
+        }
+        location.href='/welcome/'+name
+    }
+</script>
+
+</body>
+
+
+</html>

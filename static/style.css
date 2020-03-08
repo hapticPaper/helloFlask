@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Code+Pro|Ubuntu&display=swap');
+
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+bodyCode {
+    font-family: 'Source Code Pro', monospace;
+}
