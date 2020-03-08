@@ -20,13 +20,17 @@
 <span class='bodyCode' style="color:darkgrey">
 
 </span><br>
-This is route and function that renders this page.
+This is route and function that renders this page (python).
 <div style="width:700px;">
 <pre><code class="language-python">@app.route('/welcome/&lt;name&gt;')
 def hello(name):
     return render_template('personalWelcome.html', name=name)
 </code></pre>
-
+This is the html template used to make the heading.
+<pre><code class="language-html">&lt;h1&gt;
+    Welcome &#x7b;&#x7b; name &#x7d;&#x7d;
+&lt;/h1&gt;
+</code></pre>
 
 <bodyCode>/welcome/&lt;name&gt;</bodyCode>
 <br>Whatever follows <bodyCode>/welcome/</bodyCode> will become assigned to the variable <bodyCode>name</bodyCode><br>
@@ -37,6 +41,9 @@ The variable (and the value assigned to) <bodyCode>name</bodyCode>will now be av
 
 <bodyCode>name=name</bodyCode><br>
 Render the template, but replace <bodyCode>&#x7b;&#x7b; name &#x7d;&#x7d;</bodyCode> with the value passed into <bodyCode>name</bodyCode><br>
+
+
+
 </div>
 <br>
 <br>
