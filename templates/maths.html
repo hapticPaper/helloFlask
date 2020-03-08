@@ -6,7 +6,7 @@
 <script src="\static\highlightjs\highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<title>Flask!</title>
+<title>Flask Maths!</title>
 
 <head>
 </head>
@@ -28,7 +28,7 @@ def maths():
     parser.add_argument('base', type=str, required=True, help="An number is required.", action='append')
     args = parser.parse_args()
     base = args['base'][0]
-    numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['int',f'base{base} int'])
+    numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['base 10',f'base {base}'])
     return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
 </code></pre>
 HTML template to render the table:
@@ -36,6 +36,18 @@ HTML template to render the table:
     &#x7b;&#x7b; numbers | safe &#x7d;&#x7d;
 &lt;/body&gt;
 </code></pre>
+DataFrame HTML Table CSS
+<pre><code class="language-css">@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+.dataframe &#x7b;
+    font-family: 'Source Code Pro', monospace;
+    border: 1pc;
+    text-align: right;
+&#x7d;
+</code></pre>
+
+
+
+
     <bodyCode>parser.parse_args()</bodyCode>
     <br>A <bodyCode>reqparse.RequestParser()</bodyCode> must be initialized, and all arguments must be added to the class with <bodyCode>parser.add_argument()</bodyCode>.<br>
     Then arguments can be collected with <bodyCode>parser.parse_args()</bodyCode> and they can then be unpacked from the variable they get assigned to.<br>
@@ -51,33 +63,11 @@ HTML template to render the table:
 <br>
 {{ numbers | safe }}
 <br>
-<h1>Fancy Server</h1>
-<table>
-    <thead>
-        <tr>
-            <td><input class="tb" required id="welcomeName" value="Ian"></td>     
-            <td><input class="tb" required id="inputbase" value="2"></td>      
-            <td><input class="tb" required id="inputJsonbase" value="2"></td>      
-        </tr>
-        
-        <tr>
-            <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
-            <td><input type="button" onclick="location.href='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
-            <td><input type="button" onclick="location.href='/json?base=' + $('#inputJsonbase').val();" value="See JSON Maths!" /></td>      
-        </tr>
-    </thead>
-</table>
-<script>
-    function personalWelcome(){
-        var name = $("#welcomeName").val();
-        if (name == ""){
-            alert("Please provide a name");
-            return
-        }
-        location.href='/welcome/'+name
-    }
-</script>
-
+<div style="margin: 0 auto; width:100%; height:400px;">
+    <object type="text/html" data="/fancy_server"
+            style="width:100%; height:100%; margin:0%;">
+    </object>
+</div>
 </body>
 
 

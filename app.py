@@ -56,7 +56,7 @@ def maths():
     
     if int(base)<=36:
         numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['base 10',f'base {base}'])
-        return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False, justify='right'))
+        return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
     else:
         return "Please choose a base below 37"
 
@@ -96,6 +96,14 @@ def jsonmath():
     else:
         return "Please choose a base below 37"
 
+@app.route('/fancy_server')
+def fancy_server():
+    return render_template('fancy_server.html')
+
+
+@app.route('/download_file')
+def download_file():
+    return send_from_directory('static', 'favicon.ico', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(threaded=True, debug=True)

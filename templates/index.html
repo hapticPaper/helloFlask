@@ -35,45 +35,22 @@ if __name__ == '__main__':
 </code></pre>
 
     The parts that matter here are:<br><br>
-    <bodyCode>@app.route('/')</bodyCode><br><i>What follows are the instructions 
-    for what to return when the user browses to</i> <bodyCode>/</bodyCode><br><br>
+    <bodyCode>@app.route('/')</bodyCode><br>What follows are the instructions 
+    for what to return when the user browses to <bodyCode>/</bodyCode><br><br>
     <bodyCode>return render_template('index.html')</bodyCode><br>
-    <i>Render the template </i><bodyCode>index.html</bodyCode><br><br>
+    Render the template <bodyCode>index.html</bodyCode><br><br>
     <bodyCode>app.run()</bodyCode><br>
     <b>Start the server.</b>
-    The default is to run on the <i>loopback</i> address <bodyCode>127.0.0.1</bodyCode>, on port <bodyCode>5000</bodyCode>.
+    The default is to run on the loopback address <bodyCode>127.0.0.1</bodyCode>, on port <bodyCode>5000</bodyCode>.
     <br>
 </div>
 <br>
 <br>
-<h1>Fancy Server</h1>
-<table>
-    <thead>
-        <tr>
-            <td><input class="tb" required id="welcomeName" value="Ian"></td>     
-            <td><input class="tb" required id="inputbase" value="2"></td>      
-            <td><input class="tb" required id="inputJsonbase" value="2"></td>      
-        </tr>
-        
-        <tr>
-            <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
-            <td><input type="button" onclick="location.href='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
-            <td><input type="button" onclick="location.href='/json?base=' + $('#inputJsonbase').val();" value="See JSON Maths!" /></td>      
-        </tr>
-    </thead>
-</table>
-<script>
-    function personalWelcome(){
-        var name = $("#welcomeName").val();
-        if (name == ""){
-            alert("Please provide a name");
-            return
-        }
-        location.href='/welcome/'+name
-    }
-</script>
-
+<div style="margin: 0 auto; width:100%; height:400px;">
+    <object type="text/html" data="/fancy_server"
+            style="width:100%; height:100%; margin:0%;">
+    </object>
+</div>
 </body>
-
 
 </html>

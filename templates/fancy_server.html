@@ -1,0 +1,30 @@
+
+<link rel="stylesheet" type="text/css" href="\static/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<h1>Fancy Server</h1>
+<table>
+    <thead>
+        <tr>
+            <td><input class="tb" required id="welcomeName" value="Ian"></td>     
+            <td><input class="tb" required id="inputbase" value="2"></td>      
+            <td><input class="tb" required id="inputJsonbase" value="2"></td>      
+        </tr>
+        
+        <tr>
+            <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
+            <td><input type="button" onclick="parent.location='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
+            <td><input type="button" onclick="parent.location='/json?base=' + $('#inputJsonbase').val();" value="See JSON Maths!" /></td>      
+        </tr>
+    </thead>
+</table>
+<script>
+    function personalWelcome(){
+        var name = $("#welcomeName").val();
+        if (name == ""){
+            alert("Please provide a name");
+            return
+        }
+         parent.location='/welcome/'+name
+    }
+</script>
