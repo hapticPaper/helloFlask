@@ -1,7 +1,7 @@
 import flask
 from flask import Flask, render_template, send_from_directory, request, jsonify
 from flask_restful import reqparse
-import pandas, os
+import pandas, os, requests
 
 import string
 digs = string.digits + "".join([s.upper() for s in string.ascii_letters])
@@ -60,6 +60,30 @@ def maths():
     else:
         return "Please choose a base below 37"
 
+
+@app.route('/num2base/<base>')
+def num2base(base):
+    parser = reqparse.RequestParser()
+    parser.add_argument('num', type=str, required=True, help="An number is required.", action='append')
+    args = parser.parse_args()
+    num = args['num'][0]
+    try:
+        return int2base(int(num),int(base))
+    except:
+        return "Try a better number."
+
+@app.route('/numception')
+def numception():
+    parser = reqparse.RequestParser()
+    parser.add_argument('base', type=str, required=True, help="An base is required.", action='append')
+    parser.add_argument('num', type=str, required=True, help="An number is required.", action='append')
+    args = parser.parse_args()
+    base = args['base'][0]
+    num = args['num'][0]
+    try:
+        return requests.session().get(f'http://localhost:5000/json?base={base}').json()[num]
+    except:
+        return "Try a number < 1000"
 
 @app.route('/json')
 def jsonmath():
