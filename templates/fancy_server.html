@@ -6,6 +6,7 @@
 <table>
     <thead>
     <tr>
+            <th>Home</th>   
             <th>Name</th>     
             <th>Base</th>      
             <th>Base</th>   
@@ -15,6 +16,7 @@
 
     </thead>
         <tr>
+            <td></td>
             <td><input class="tb" required id="welcomeName" value="Ian"></td>     
             <td><input class="tb" required id="inputbase" value="2"></td>      
             <td><input class="tb" required id="inputJsonbase" value="2"></td>   
@@ -24,6 +26,7 @@
         </tr>
         
         <tr>
+            <td><input type="button" onclick="parent.location='/'" value="Home" /></td>     
             <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
             <td><input type="button" onclick="parent.location='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
             <td><input type="button" onclick="window.open('/json?base=' + $('#inputJsonbase').val(), '_blank');" value="See JSON Maths!" /></td>   
