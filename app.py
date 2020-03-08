@@ -1,7 +1,7 @@
 import flask
-from flask import Flask, render_template, send_from_directory, request, jsonify
+from flask import Flask, render_template, send_from_directory, request, jsonify, Response, stream_with_context
 from flask_restful import reqparse
-import pandas, os, requests
+import pandas, os, requests, time
 
 import string
 digs = string.digits + "".join([s.upper() for s in string.ascii_letters])
@@ -10,22 +10,13 @@ digs = string.digits + "".join([s.upper() for s in string.ascii_letters])
 
 
 def int2base(x, base):
-    if x < 0:
-        sign = -1
-    elif x == 0:
-        return digs[0]
-    else:
-        sign = 1
-
-    x *= sign
     digits = []
-
+    if x == 0 :
+        digits=['0']
     while x:
         digits.append(digs[int(x % base)])
         x = int(x / base)
 
-    if sign < 0:
-        digits.append('-')
 
     digits.reverse()
 
@@ -100,6 +91,20 @@ def jsonmath():
 def fancy_server():
     return render_template('fancy_server.html')
 
+
+@app.route('/big_download/', defaults={'end': 1001})
+@app.route('/big_download/<end>')
+def big_download(end):
+    parser = reqparse.RequestParser()
+    parser.add_argument('base', type=str, required=True, help="An number is required.", action='append')
+    args = parser.parse_args()
+    base = args['base'][0]
+    ds = f"base10,base{base}\n"
+    ds += "\n".join([','.join([str(row), int2base(row, int(base))]) for row in range(0,int(end)+1)])            
+    return Response(ds,
+                    mimetype="text/plain",
+                    headers={"Content-Disposition":
+                            f"attachment;filename=big_download_{int(time.time())}.csv"})
 
 @app.route('/download_file')
 def download_file():

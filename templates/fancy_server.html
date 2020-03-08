@@ -5,18 +5,31 @@
 <h1>Fancy Server</h1>
 <table>
     <thead>
+    <tr>
+            <th>Name</th>     
+            <th>Base</th>      
+            <th>Base</th>   
+            <th>Download File</th>   
+            <th>Base and End</th>      
+        </tr>
+
+    </thead>
         <tr>
             <td><input class="tb" required id="welcomeName" value="Ian"></td>     
             <td><input class="tb" required id="inputbase" value="2"></td>      
-            <td><input class="tb" required id="inputJsonbase" value="2"></td>      
+            <td><input class="tb" required id="inputJsonbase" value="2"></td>   
+            <td></td>   
+            <td><input class="tb" required id="inputBigDownload" value="2" style="width:40px">
+                <input class="tb" required id="inputBigDownloadLen" value="20000" style="width:90px"></td>      
         </tr>
         
         <tr>
             <td><input type="button" onclick="personalWelcome()" value="Personal Welcome" /></td>     
             <td><input type="button" onclick="parent.location='/maths?base=' + $('#inputbase').val();" value="See Maths!" /></td>
-            <td><input type="button" onclick="parent.location='/json?base=' + $('#inputJsonbase').val();" value="See JSON Maths!" /></td>      
+            <td><input type="button" onclick="window.open('/json?base=' + $('#inputJsonbase').val(), '_blank');" value="See JSON Maths!" /></td>   
+            <td><input type="button" onclick="window.open('/download_file', '_blank');" value="Download file" /></td>      
+            <td><input type="button" onclick="window.open('/big_download/'+$('#inputBigDownloadLen').val()+'?base=' + $('#inputBigDownload').val(), '_blank');" value="Download big file" /></td>      
         </tr>
-    </thead>
 </table>
 <script>
     function personalWelcome(){
