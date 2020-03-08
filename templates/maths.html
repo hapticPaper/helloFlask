@@ -21,7 +21,7 @@
 
 </span><br>
 This is route and function that renders this page.
-<div style="width:1000px;">
+<div style="width:1080px;">
 <pre><code class="language-python">@app.route('/maths')
 def maths():
     parser = reqparse.RequestParser()
@@ -31,18 +31,19 @@ def maths():
     numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['int',f'base{base} int'])
     return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
 </code></pre>
+
+    <bodyCode>parser.parse_args()</bodyCode>
+    <br>A <bodyCode>reqparse.RequestParser()</bodyCode> must be initialized, and all arguments must be added to the class with <bodyCode>parser.add_argument()</bodyCode>.<br>
+    Then arguments can be collected with <bodyCode>parser.parse_args()</bodyCode> and they can then be unpacked from the variable they get assigned to.<br>
+    <br>
+
+    <bodyCode>numbersdf.to_html(index=False)</bodyCode><br>
+    Pandas DataFrames have a function <bodyCode>.to_html()</bodyCode>which will make an html table that can be directly rendered. <br><br>
+
+    <bodyCode>&#x7b;&#x7b; numbers | safe &#x7d;&#x7d;</bodyCode><br>
+    When the template is rendered, any html code provided in <bodyCode>numbers</bodyCode> is <bodyCode>safe</bodyCode> and we can directly render it.<br>
 </div>
 
-<bodyCode>parser.parse_args()</bodyCode>
-<br>A <bodyCode>reqparse.RequestParser()</bodyCode> must be initialized, and all arguments must be added to the class with <bodyCode>parser.add_argument()</bodyCode>. Then arguments can be collected with 
-<bodyCode>parser.parse_args()</bodyCode> and they can then be unpacked from the variable they get assigned to.<br>
-<br>
-
-<bodyCode>numbersdf.to_html(index=False)</bodyCode><br>
-Pandas DataFrames have a function <bodyCode>.to_html()</bodyCode>which will make an html table that can be directly rendered. <br><br>
-
-<bodyCode>&#x7b;&#x7b; numbers | safe &#x7d;&#x7d;</bodyCode><br>
-When the template is rendered, any html code provided in <bodyCode>numbers</bodyCode> is <bodyCode>safe</bodyCode> and we can directly render it.<br>
 <br>
 {{ numbers | safe }}
 <br>

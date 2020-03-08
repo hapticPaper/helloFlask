@@ -11,3 +11,9 @@ body {
 bodyCode {
     font-family: 'Source Code Pro', monospace;
 }
+
+.dataframe {
+    font-family: 'Source Code Pro', monospace;
+    border: 1pc;
+    text-align: right;
+}

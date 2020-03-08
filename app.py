@@ -55,8 +55,8 @@ def maths():
     base = args['base'][0]
     
     if int(base)<=36:
-        numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['int',f'base{base} int'])
-        return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
+        numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['base 10',f'base {base}'])
+        return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False, justify='right'))
     else:
         return "Please choose a base below 37"
 

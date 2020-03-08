@@ -21,15 +21,15 @@
 
 </span><br>
 This is route and function that renders this page.
-<div style="width:50vw;">
+<div style="width:700px;">
 <pre><code class="language-python">@app.route('/welcome/&lt;name&gt;')
 def hello(name):
     return render_template('personalWelcome.html', name=name)
 </code></pre>
-</div>
+
 
 <bodyCode>/welcome/&lt;name&gt;</bodyCode>
-<br>Whatever follows <bodyCode>/welcome/</bodyCode> will become assigned to the variable <bodyCode>name</bodyCode><br>.
+<br>Whatever follows <bodyCode>/welcome/</bodyCode> will become assigned to the variable <bodyCode>name</bodyCode><br>
 <br>
 
 <bodyCode>def hello(name):</bodyCode><br>
@@ -37,6 +37,7 @@ The variable (and the value assigned to) <bodyCode>name</bodyCode>will now be av
 
 <bodyCode>name=name</bodyCode><br>
 Render the template, but replace <bodyCode>&#x7b;&#x7b; name &#x7d;&#x7d;</bodyCode> with the value passed into <bodyCode>name</bodyCode><br>
+</div>
 <br>
 <br>
 <br>
