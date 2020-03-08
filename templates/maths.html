@@ -31,7 +31,11 @@ def maths():
     numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['int',f'base{base} int'])
     return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
 </code></pre>
-
+HTML template to render the table:
+<pre><code class="language-html">&lt;body&gt;
+    &#x7b;&#x7b; numbers | safe &#x7d;&#x7d;
+&lt;/body&gt;
+</code></pre>
     <bodyCode>parser.parse_args()</bodyCode>
     <br>A <bodyCode>reqparse.RequestParser()</bodyCode> must be initialized, and all arguments must be added to the class with <bodyCode>parser.add_argument()</bodyCode>.<br>
     Then arguments can be collected with <bodyCode>parser.parse_args()</bodyCode> and they can then be unpacked from the variable they get assigned to.<br>
