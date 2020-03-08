@@ -108,7 +108,7 @@ def big_download(end):
 
 @app.route('/download_file')
 def download_file():
-    return send_from_directory('static', 'favicon.ico', as_attachment=True)
+    return send_from_directory(os.path.join('static','images'), 'github.png', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(threaded=True, debug=True)
