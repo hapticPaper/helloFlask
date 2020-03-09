@@ -9,16 +9,16 @@ digs = string.digits + "".join([s.upper() for s in string.ascii_letters])
 
 def parse_header():
     if 'X-Forwarded-For' in request.headers:
-		print(f"ip:{request.headers['X-Forwarded-For']}")
-		locale = requests.get(f"http://ip-api.com/json/{request.headers['X-Forwarded-For']}").json()
-		city=locale['city'] 
-		country=locale['countryCode']
-		state=locale['region']
-		print(f"location api: {city}, {country}, {state}")
-		print("full locale: ", locale)
+        print(f"ip:{request.headers['X-Forwarded-For']}")
+        locale = requests.get(f"http://ip-api.com/json/{request.headers['X-Forwarded-For']}").json()
+        city=locale['city'] 
+        country=locale['countryCode']
+        state=locale['region']
+        print(f"location api: {city}, {country}, {state}")
+        print("full locale: ", locale)
+        return city, country, state, request.headers['X-Forwarded-For']
     else:
-		city, country, state = 'NA', 'US','NY'
-    return city, country, state, request.headers['X-Forwarded-For']
+        return 'NA', 'US','NY', 'NA'
 
 
 def int2base(x, base):
