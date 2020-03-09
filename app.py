@@ -7,6 +7,18 @@ import string
 digs = string.digits + "".join([s.upper() for s in string.ascii_letters])
 
 
+def parse_header():
+    if 'X-Forwarded-For' in request.headers:
+		print(f"ip:{request.headers['X-Forwarded-For']}")
+		locale = requests.get(f"http://ip-api.com/json/{request.headers['X-Forwarded-For']}").json()
+		city=locale['city'] 
+		country=locale['countryCode']
+		state=locale['region']
+		print(f"location api: {city}, {country}, {state}")
+		print("full locale: ", locale)
+    else:
+		city, country, state = 'NA', 'US','NY'
+    return city, country, state, request.headers['X-Forwarded-For']
 
 
 def int2base(x, base):
@@ -32,11 +44,13 @@ def favicon():
 
 @app.route('/')
 def main():
-    return render_template('index.html')
+    city, country, state, ip = parse_header()
+    return render_template('index.html', ip=ip)
 
 @app.route('/welcome/<name>')
 def hello(name):
-    return render_template('personalWelcome.html', name=name)
+    city, country, state, ip = parse_header()
+    return render_template('personalWelcome.html', name=name, ip=ip)
 
 @app.route('/maths')
 def maths():
@@ -44,10 +58,10 @@ def maths():
     parser.add_argument('base', type=str, required=True, help="An number is required.", action='append')
     args = parser.parse_args()
     base = args['base'][0]
-    
+    city, country, state, ip = parse_header()
     if int(base)<=36:
         numbersdf = pandas.DataFrame([[n, int2base(n, int(base))] for n in range(30)], columns = ['base 10',f'base {base}'])
-        return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False))
+        return render_template('maths.html',base=base, numbers=numbersdf.to_html(index=False), ip=ip)
     else:
         return "Please choose a base below 37"
 
@@ -89,7 +103,9 @@ def jsonmath():
 
 @app.route('/fancy_server')
 def fancy_server():
-    return render_template('fancy_server.html')
+    city, country, state, ip = parse_header()
+    
+    return render_template('fancy_server.html', ip=ip)
 
 
 @app.route('/big_download/', defaults={'end': 1001})

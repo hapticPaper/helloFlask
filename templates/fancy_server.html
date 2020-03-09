@@ -1,11 +1,22 @@
-<!-- Global site tag (gtag.js) - Google Analytics -->
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-59VZQPM4K9"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-59VZQPM4K9');
+</script>
 
-  gtag('config', 'G-59VZQPM4K9');
+    <!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'G-59VZQPM4K9', 'auto');
+ga('send', {
+                hitType: 'event',
+                eventCategory: 'fancy_server',
+                eventAction: 'loadPage',
+                eventLabel: 'IP: {{ ip }}'
+            });
 </script>
 
 <link rel="stylesheet" type="text/css" href="\static/style.css">
