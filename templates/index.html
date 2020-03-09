@@ -24,7 +24,7 @@ ga('send', {
 
 
 
-<link rel="stylesheet" type="text/css" href="\static/style.css">
+<link rel="stylesheet" type="text/css" href="/static/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="\static\highlightjs\atom-one-dark.css">
@@ -47,7 +47,7 @@ ga('send', {
 </span><br>
 This is some boiler-plate code to launch the server behind this page:
 <div style="width:750px;">
-<pre><code class="language-python">from flask import Flask
+<pre><code class="language-python">from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -59,6 +59,10 @@ if __name__ == '__main__':
     app.run(threaded=True, debug=True)
 </code></pre>
 
+<span style="float:right">
+    <input type="button" onclick="window.open('/downloadBoilerplate', '_blank');" value="Download Script" />
+</span>
+
     The parts that matter here are:<br><br>
     <bodyCode>@app.route('/')</bodyCode><br>What follows are the instructions 
     for what to return when the user browses to <bodyCode>/</bodyCode><br><br>
@@ -68,6 +72,9 @@ if __name__ == '__main__':
     <b>Start the server.</b>
     The default is to run on the loopback address <bodyCode>127.0.0.1</bodyCode>, on port <bodyCode>5000</bodyCode>.
     <br>
+    <span style="float:right">
+    <input type="button" onclick="window.open('/download_zip', '_blank');" value="Download Barebones Site" />
+</span>
 </div>
 <br>
 <br>

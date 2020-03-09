@@ -47,6 +47,23 @@ def main():
     city, country, state, ip = parse_header()
     return render_template('index.html', ip=ip)
 
+@app.route('/downloadBoilerplate')
+def downloadBoilerplate():
+    download_text = """from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def main():
+    return render_template('index.html')
+    
+if __name__ == '__main__':
+    app.run(threaded=True, debug=True)"""
+    return Response(download_text,
+                    mimetype="text/plain",
+                    headers={"Content-Disposition":
+                            f"attachment;filename=hello_flask.py"})
+
 @app.route('/welcome/<name>')
 def hello(name):
     city, country, state, ip = parse_header()
@@ -125,6 +142,10 @@ def big_download(end):
 @app.route('/download_file')
 def download_file():
     return send_from_directory(os.path.join('static','images'), 'github.png', as_attachment=True)
+
+@app.route('/download_zip')
+def download_zip():
+    return send_from_directory(os.path.join('static','files'), 'hello_flask.zip', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(threaded=True, debug=True)
