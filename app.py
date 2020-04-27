@@ -1,11 +1,17 @@
 import flask
 from flask import Flask, render_template, send_from_directory, request, jsonify, Response, stream_with_context
 from flask_restful import reqparse
-import pandas, os, requests, time
+import pandas, os, requests, time, base64, requests
+
+from private.gconfig import gmap_key
+gkey = base64.b64decode(gmap_key).decode('utf8')
 
 import string
 digs = string.digits + "".join([s.upper() for s in string.ascii_letters])
 
+GMAPS = 'https://maps.googleapis.com/maps/api'
+
+def ENDPOINT(ep): return f"{GMAPS}/{ep}/json"
 
 def parse_header():
     if 'X-Forwarded-For' in request.headers:
@@ -18,7 +24,7 @@ def parse_header():
         print("full locale: ", locale)
         return city, country, state, request.headers['X-Forwarded-For']
     else:
-        return 'NA', 'US','NY', 'NA'
+        return 'New York', 'US','NY', '127.0.0.1'
 
 
 def int2base(x, base):
@@ -123,6 +129,18 @@ def fancy_server():
     city, country, state, ip = parse_header()
     
     return render_template('fancy_server.html', ip=ip)
+
+
+@app.route('/covid')
+def covid():    
+    city, country, state, ip = parse_header()
+    r = requests.get(ENDPOINT('geocode'), params = {'address':city, 'key':gkey})
+    try:
+        r = r.json()
+        latlong = r['results'][0]['geometry']['location']
+        return render_template('covid.html', lat = latlong['lat'], lng = latlong['lng'] )
+    except Exception as e:
+        return render_template('covid.html', lat = '38.897142', lng = '-77.036766' )
 
 
 @app.route('/big_download/', defaults={'end': 1001})
